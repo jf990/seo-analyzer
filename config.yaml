@@ -1,0 +1,7 @@
+protocol: "https:"
+host: "master-stage.developers.arcgis.com"
+startPage: "/example-apps/data-collection-ios/"
+subPathOnly: true
+saveToCSV: "page-analysis.csv"
+showReport: true
+debug: true
