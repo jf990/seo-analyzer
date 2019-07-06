@@ -67,7 +67,7 @@ show final report to stdout. Default is false.
 
 ## Issues and bug reports
 
-Feel free to submit issues, bug reports, and enhancement requests using the [issues tab](/issues/).
+Feel free to submit issues, bug reports, and enhancement requests using the [issues tab](https://github.com/jf990/seo-analyzer/issues).
 
 ## Contributing
 
