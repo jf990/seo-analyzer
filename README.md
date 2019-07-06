@@ -12,23 +12,81 @@ It is best to run this on a sub-section of a website. While you could run it fro
 
 See `config.yaml`
 
-`protocol`: force protocol when we don't know (e.g. use https when encountering a // URL)
-`host`: specify host to crawl (required)
-`startPage`: specify start path on host to crawl (required)
-`subPathOnly`: only score pages under start path. If not specified will attempt to crawl all pages found, and this is very dangerous. Default is true.
-`saveToCSV`: path to file name to save results in CSV file (leave empty to not save)
-`showReport`: show final report to stdout. Default is false.
-`debug`: turn on debugging. Default is false.
+`protocol`:
+force protocol when we don't know (e.g. use https when encountering a // URL)
+
+`host`:
+specify host to crawl (required)
+
+`startPage`:
+specify start path on host to crawl (required)
+
+`subPathOnly`:
+only score pages under start path. If not specified will attempt to crawl all pages found, and this is very dangerous. Default is true.
+
+`saveToCSV`:
+path to file name to save results in CSV file (leave empty to not save)
+
+`showReport`:
+show final report to stdout. Default is false.
+
+`debug`:
+turn on debugging. Default is false.
 
 ## Command line options
 
---help             Show help
---version          Show version number
--c, --conf         path to configuration file (must be a YAML formated file)
--h, --host         specify host to crawl (required)
--p, --startpage    specify start path on host to crawl (required)
--o, --savetocsv    path to file name to save results in CSV file (leave empty to not save)
--d, --debug        turn on debugging. Default is false.
--l, --protocol     force protocol when we don't know (e.g. use https when encountering a // URL)
--a, --subpathonly  only score pages under start path. If not specified will attempt to crawl all pages found, and this is very dangerous. Default is true.
--r, --showreport   show final report to stdout. Default is false.
+`--help`:
+Show help
+
+`--version`:
+Show version number
+
+`-c`, `--conf`:
+path to configuration file (must be a YAML formated file)
+
+`-h`, `--host`:
+specify host to crawl (required)
+
+`-p`, `--startpage`:
+specify start path on host to crawl (required)
+
+`-o`, `--savetocsv`:
+path to file name to save results in CSV file (leave empty to not save)
+
+`-d`, `--debug`:
+turn on debugging. Default is false.
+
+`-l`, `--protocol`:
+force protocol when we don't know (e.g. use https when encountering a // URL)
+
+`-a`, `--subpathonly`:
+only score pages under start path. If not specified will attempt to crawl all pages found, and this is very dangerous. Default is true.
+
+`-r`, `--showreport`:
+show final report to stdout. Default is false.
+
+## Issues and bug reports
+
+Feel free to submit issues, bug reports, and enhancement requests using the [issues tab](issues/).
+
+## Contributing
+
+All contributions are welcome and encouraged. Please follow the [Esri Community Code of Conduct](https://github.com/Esri/contributing/blob/master/CODE_OF_CONDUCT.md).
+
+NOTE: Be sure to merge the latest from "upstream" before making a pull request!
+
+## License
+
+Copyright 2018-2019 by Esri
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
