@@ -36,7 +36,7 @@
     "path": "^0.12.7",
     "strip": "^3.0.0",
     "strip-js": "^1.2.0",
-    "text-miner": "^1.3.0",
+    "text-miner": "^2.0.0",
     "url-parse": "^1.5.10",
     "yargs": "^13.2.4"
   }
