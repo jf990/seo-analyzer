@@ -309,6 +309,7 @@ function isIndexPage(URL) {
 function startCrawler(configuration) {
     var pageCrawler = new Crawler({
         maxConnections : 1,
+        strictSSL: true,
         rateLimit: 1000,
         callback: analyzePage
     });
