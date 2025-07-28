@@ -1,8 +1,9 @@
 {
   "name": "site-crawler",
-  "version": "0.0.3",
+  "version": "0.2.2",
   "description": "Website crawler to determine if it is SEO healthy",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
     "start": "node src/index.js",
     "test": "jest"
@@ -27,17 +28,19 @@
     "url": "https://github.com/jf990/seo-analyzer/issues"
   },
   "dependencies": {
-    "chalk": "^2.4.2",
-    "crawler": "file:../node-crawler",
+    "chalk": "^5.4.1",
+    "crawler": "^1.5.0",
     "csv-writer": "^1.6.0",
-    "jest": "^29.4.1",
-    "js-yaml": "^3.13.1",
+    "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "path": "^0.12.7",
     "strip": "^3.0.0",
     "strip-js": "^1.2.0",
     "text-miner": "^2.0.0",
     "url-parse": "^1.5.10",
-    "yargs": "^13.2.4"
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }

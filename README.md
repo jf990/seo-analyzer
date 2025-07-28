@@ -8,15 +8,33 @@ Run this utility by updating the configuration file or providing command line op
 
 It is best to run this on a sub-section of a website. While you could run it from /, doing that could be very slow and potentially crash the app due to memory exhaustion if the site has a lot of pages and links. A better method is to chunk the site by sub-folder and analyze a section at a time.
 
+## Development
+
+Install project dependencies:
+
+```bash
+npm install
+```
+
+Source is found in the `src` folder, mainly `index.js`.
+
+Edit the `config.yaml` file to set the crawl pattern (see below.)
+
+Run the project with:
+
+```bash
+npm start
+```
+
 ## Configuration file options
 
-See `config.yaml`
+Edit `config.yaml` to configure the crawler for the website you want to analyze.
 
 `protocol`:
 force protocol when we don't know (e.g. use https when encountering a // URL)
 
 `host`:
-specify host to crawl (required)
+specify host to crawl (required.) This is a domain, e.g. `example.com`.
 
 `startPage`:
 specify start path on host to crawl (required)
@@ -77,7 +95,7 @@ NOTE: Be sure to merge the latest from "upstream" before making a pull request!
 
 ## License
 
-Copyright 2018-2019 by Esri
+Copyright 2024 by Esri
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

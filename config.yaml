@@ -1,6 +1,6 @@
 protocol: "https:"
-host: "master-stage.developers.arcgis.com"
-startPage: "/example-apps/data-collection-ios/"
+host: "citra-v2-preview.location.afd.arcgis.com"
+startPage: "/help/"
 subPathOnly: true
 saveToCSV: "page-analysis.csv"
 showReport: true

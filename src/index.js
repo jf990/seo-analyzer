@@ -3,11 +3,18 @@
  * only analyzes pages on the same domain that are under the path of the target page. If it encounters a URL for a
  * domain other than the configuration.host domain, it will only 404 check that URL.
  */
-const URLParse = require("url-parse");
-const Path = require("path");
-const StripJS = require("strip-js");
-const HTMLStrip = require("strip");
-const TextMiner = require("text-miner");
+import URLParse from "url-parse";
+import Path from "path";
+import StripJS from "strip-js";
+import HTMLStrip from "strip";
+import TextMiner from "text-miner";
+import chalk from "chalk";
+import yargs from "yargs";
+import yaml from "js-yaml";
+import fs from "fs";
+import Crawler from "crawler";
+import CSVWriter from "csv-writer";
+
 
 // Analyzer configuration parameters. Shown here are the defaults. Override any option here
 // with the configuration file and command line arguments.
@@ -300,9 +307,9 @@ function isIndexPage(URL) {
  * @returns {int} exit code
  */
 function startCrawler(configuration) {
-    const Crawler = require("crawler");
     var pageCrawler = new Crawler({
         maxConnections : 1,
+        strictSSL: true,
         rateLimit: 1000,
         callback: analyzePage
     });
@@ -587,8 +594,6 @@ function startCrawler(configuration) {
      * Save the information we gathered to a CSV file.
      */
     function saveResultsToCSVFile() {
-        const createCSVWriter = require("csv-writer").createObjectCsvWriter;
-
         if (configuration.saveToCSV != null && configuration.saveToCSV.length > 0) {
             const header = [
                 {id: "url", title: "URL"},
@@ -602,10 +607,10 @@ function startCrawler(configuration) {
                 {id: "analysis", title: "Page Analysis"},
                 {id: "terms", title: "Terms"}
             ];
-            const csvWriter = createCSVWriter({
+            const csvWriter = CSVWriter.createObjectCsvWriter({
                 path: configuration.saveToCSV,
                 header: header
-            })
+            });
             let row;
             let records = [];
             for (var URL in pagesVisited) {
@@ -637,7 +642,7 @@ function startCrawler(configuration) {
             csvWriter.writeRecords(records)
                 .then(function() {
                     debugLog("CSV file saved to " + configuration.saveToCSV);
-                })
+                });
         }
     }
 
@@ -645,23 +650,22 @@ function startCrawler(configuration) {
      * Display the results of the analysis to stdout.
      */
     function finalReport() {
-        let chalk = require("chalk");
-        let pageCount = Object.keys(pagesVisited).length;
-        console.log(chalk.white("-----------------------------------------------"));
-        console.log(chalk.bold.yellow(`scanning complete, ${pageCount} pages analyzed.`));
-        for (var URL in pagesVisited) {
-            let pageDetails = pagesVisited[URL];
-            if (pageDetails.analyze) {
-                let terms = frequencyToString(pageDetails.wordFrequencyList);
-                console.log(chalk.white("----------------------------------------------"));
-                console.log(chalk.green(URL));
-                console.log(chalk.blueBright(`   title: ${pageDetails.title}`));
-                console.log(chalk.blueBright(`   description: ${pageDetails.description}`));
-                console.log(chalk.blueBright(`   keywords: ${pageDetails.keywords}`));
-                console.log(chalk.bold.blueBright(`   score: ${pageDetails.pageScore} ${pageDetails.pageAnalysis}`));
-                console.log(chalk.blue(`   terms: ${terms}`));
-            }
-        }
+      let pageCount = Object.keys(pagesVisited).length;
+      console.log(chalk.white("-----------------------------------------------"));
+      console.log(chalk.bold.yellow(`scanning complete, ${pageCount} pages analyzed.`));
+      for (var URL in pagesVisited) {
+          let pageDetails = pagesVisited[URL];
+          if (pageDetails.analyze) {
+              let terms = frequencyToString(pageDetails.wordFrequencyList);
+              console.log(chalk.white("----------------------------------------------"));
+              console.log(chalk.green(URL));
+              console.log(chalk.blueBright(`   title: ${pageDetails.title}`));
+              console.log(chalk.blueBright(`   description: ${pageDetails.description}`));
+              console.log(chalk.blueBright(`   keywords: ${pageDetails.keywords}`));
+              console.log(chalk.bold.blueBright(`   score: ${pageDetails.pageScore} ${pageDetails.pageAnalysis}`));
+              console.log(chalk.blue(`   terms: ${terms}`));
+          }
+      }
     }
 
     // save the parent folder so we don't recompute it every iteration
@@ -681,7 +685,7 @@ function startCrawler(configuration) {
  * @returns {object} final configuration
  */
 function updateConfiguration(defaultConfiguration) {
-    const args = require('yargs')
+    yargs()
     .option("c", {
         alias: "conf",
         demandOption: false,
@@ -739,11 +743,10 @@ function updateConfiguration(defaultConfiguration) {
         type: "boolean"
     })
     .argv;
-    const yaml = require('js-yaml');
-    const fs = require('fs');
 
     let configuration = Object.assign(defaultConfiguration);
     let configurationFilePath;
+    const args = yargs().argv;
     if (args.conf) {
         configurationFilePath = args.conf;
     } else {
@@ -752,7 +755,7 @@ function updateConfiguration(defaultConfiguration) {
     if (fs.existsSync(configurationFilePath)) {
         let yamlData = fs.readFileSync(configurationFilePath, "utf8");
         if (yamlData) {
-            let yamlConfiguration = yaml.safeLoad(yamlData);
+            let yamlConfiguration = yaml.load(yamlData);
             if (yamlConfiguration.hasOwnProperty("protocol")) {
                 configuration.protocol = yamlConfiguration.protocol;
             }
