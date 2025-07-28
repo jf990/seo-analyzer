@@ -1,5 +1,5 @@
 protocol: "https:"
-host: "citra-v2-preview.location.afd.arcgis.com"
+host: "main.location.afd.arcgis.com"
 startPage: "/help/"
 subPathOnly: true
 saveToCSV: "page-analysis.csv"
