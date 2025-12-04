@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node --use-system-ca src/index.js",
     "test": "jest"
   },
   "keywords": [
@@ -28,7 +28,7 @@
     "url": "https://github.com/jf990/seo-analyzer/issues"
   },
   "dependencies": {
-    "chalk": "^5.4.1",
+    "chalk": "^5.6.2",
     "crawler": "^2.0.2",
     "csv-writer": "^1.6.0",
     "js-yaml": "^4.1.1",
@@ -41,6 +41,6 @@
     "yargs": "^18.0.0"
   },
   "devDependencies": {
-    "jest": "^30.0.5"
+    "jest": "^30.2.0"
   }
 }

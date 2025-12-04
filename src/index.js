@@ -300,7 +300,6 @@ function isIndexPage(URL) {
     return URLParts.pathname.length == 0 || URLParts.pathname == "/" || /^\/?index\.(html|php|jsp)$/.test(URLParts.pathname);
 }
 
-
 /**
  * Start the crawler after the environment is set up.
  * @param {object} configuration
@@ -520,9 +519,8 @@ function startCrawler(configuration) {
         if (error) {
             debugLog(error);
         } else {
-            let proposedURL = response.request.uri.href;
+            let proposedURL = response.options.url;
             let URLParts = URLParse(proposedURL);
-            debugLog(`considering ${proposedURL}`);
             if (pagesVisited[proposedURL] == undefined || pagesVisited[proposedURL].statusCode < 0) {
                 let pageDetails = pagesVisited[proposedURL] || {};
                 pageDetails.statusCode = response.statusCode;
